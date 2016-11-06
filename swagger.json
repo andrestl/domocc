@@ -67,7 +67,7 @@
       "get" : {
         "summary" : "Device List",
         "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
-        "tags" : [ "Device" ],
+        "tags" : [ "Management" ],
         "parameters" : [ ],
         "responses" : {
           "200" : {
@@ -117,8 +117,8 @@
       "get" : {
         "summary" : "Controller List",
         "description" : "The **controller/list** endpoint returns the list of controller for an installation.\n",
-        "parameters" : [ ],
         "tags" : [ "Controller" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "An array of devices",
