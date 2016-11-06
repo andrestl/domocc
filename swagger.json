@@ -24,7 +24,7 @@
         "tags" : [ "Device" ],
         "responses" : {
           "200" : {
-            "description" : "Successful",
+            "description" : "On success the ",
             "schema" : {
               "$ref" : "#/definitions/DimableLight"
             }
@@ -161,44 +161,84 @@
         }
       }
     },
-    "User" : {
+    "Installation" : {
       "type" : "object",
+      "properties" : {
+        "owner" : {
+          "$ref" : "#/definitions/User"
+        },
+        "address1" : {
+          "description" : "address line 1",
+          "type" : "string"
+        },
+        "address2" : {
+          "description" : "address line 2",
+          "type" : "string"
+        },
+        "code" : {
+          "description" : "Postal Code or Zip Code",
+          "type" : "string"
+        },
+        "country" : {
+          "description" : "Country name",
+          "type" : "string"
+        },
+        "location" : {
+          "$ref" : "#/definitions/Geography"
+        }
+      },
       "allOf" : [ {
         "$ref" : "#/definitions/Id"
-      }, {
-        "properties" : {
-          "username" : {
-            "type" : "string",
-            "description" : "Short name to describe a device"
-          },
-          "password" : {
-            "type" : "string",
-            "format" : "password",
-            "description" : "Short name to describe a device"
-          },
-          "name" : {
-            "type" : "string",
-            "description" : "Full text description"
-          },
-          "lastConnected" : {
-            "type" : "string",
-            "format" : "date-time",
-            "description" : "Full text description"
-          },
-          "activated" : {
-            "type" : "boolean",
-            "description" : "account has been activated"
-          },
-          "activationLink" : {
-            "type" : "string",
-            "description" : "URL to activate the account"
-          },
-          "activationLinkExpire" : {
-            "type" : "string",
-            "format" : "date-time",
-            "description" : "Time when the link will expire"
-          }
+      } ]
+    },
+    "InstallationAction" : {
+      "type" : "object",
+      "properties" : {
+        "cloudAction" : {
+          "$ref" : "#/definitions/CloudAction"
         }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/Installation"
+      } ]
+    },
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "username" : {
+          "type" : "string",
+          "description" : "Short name to describe a device"
+        },
+        "password" : {
+          "type" : "string",
+          "format" : "password",
+          "description" : "Short name to describe a device"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Full text description"
+        },
+        "lastConnected" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Full text description"
+        },
+        "activated" : {
+          "type" : "boolean",
+          "description" : "account has been activated"
+        },
+        "activationLink" : {
+          "type" : "string",
+          "description" : "URL to activate the account"
+        },
+        "activationLinkExpire" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Time when the link will expire"
+        }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/Id"
       } ]
     },
     "Device" : {
