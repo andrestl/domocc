@@ -42,8 +42,8 @@
       "get" : {
         "summary" : "Device List",
         "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
-        "parameters" : [ ],
         "tags" : [ "Device" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "An array of devices",
@@ -67,8 +67,8 @@
       "get" : {
         "summary" : "Device List",
         "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
-        "parameters" : [ ],
         "tags" : [ "Device" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "An array of devices",
@@ -92,8 +92,8 @@
       "get" : {
         "summary" : "Device List",
         "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
-        "parameters" : [ ],
         "tags" : [ "Device" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "An array of devices",
@@ -321,17 +321,16 @@
     "DimableLightAction" : {
       "type" : "object",
       "description" : "Dimmers are devices used to lower the brightness of a light",
+      "properties" : {
+        "cloudAction" : {
+          "$ref" : "#/definitions/CloudAction"
+        },
+        "deviceAction" : {
+          "$ref" : "#/definitions/DeviceAction"
+        }
+      },
       "allOf" : [ {
         "$ref" : "#/definitions/DimableLight"
-      }, {
-        "properties" : {
-          "cloudAction" : {
-            "$ref" : "#/definitions/CloudAction"
-          },
-          "deviceAction" : {
-            "$ref" : "#/definitions/DeviceAction"
-          }
-        }
       } ]
     },
     "DeviceAction" : {
