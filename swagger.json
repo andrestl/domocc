@@ -10,7 +10,7 @@
   "paths" : {
     "/controller/device/dimablelight" : {
       "get" : {
-        "summary" : "Send a command to a Dimable Light Switch Device",
+        "summary" : "Send a command to a Dimable Light Switch Devices",
         "description" : "This end point receive a command for a dimablelight.\n",
         "parameters" : [ {
           "name" : "command",
