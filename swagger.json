@@ -1,0 +1,360 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Control Center",
+    "description" : "Control Center API for Home Automation",
+    "version" : "0.0.1"
+  },
+  "schemes" : [ "https" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/controller/device/dimablelight" : {
+      "get" : {
+        "summary" : "Send a command to a Dimable Light Switch Device",
+        "description" : "This end point receive a command for a dimablelight.\n",
+        "parameters" : [ {
+          "name" : "command",
+          "in" : "body",
+          "description" : "Send a command to DimableLight devices",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/DimableLightAction"
+          }
+        } ],
+        "tags" : [ "Device" ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful",
+            "schema" : {
+              "$ref" : "#/definitions/DimableLight"
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/device/list" : {
+      "get" : {
+        "summary" : "Device List",
+        "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
+        "parameters" : [ ],
+        "tags" : [ "Device" ],
+        "responses" : {
+          "200" : {
+            "description" : "An array of devices",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Device"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/user/list" : {
+      "get" : {
+        "summary" : "Device List",
+        "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
+        "parameters" : [ ],
+        "tags" : [ "Device" ],
+        "responses" : {
+          "200" : {
+            "description" : "An array of devices",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Device"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/dimablelight/list" : {
+      "get" : {
+        "summary" : "Device List",
+        "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
+        "parameters" : [ ],
+        "tags" : [ "Device" ],
+        "responses" : {
+          "200" : {
+            "description" : "An array of devices",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Device"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/DimableLight"
+            }
+          }
+        }
+      }
+    },
+    "/controller/list" : {
+      "get" : {
+        "summary" : "Controller List",
+        "description" : "The **controller/list** endpoint returns the list of controller for an installation.\n",
+        "parameters" : [ ],
+        "tags" : [ "Controller" ],
+        "responses" : {
+          "200" : {
+            "description" : "An array of devices",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Controller"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Id" : {
+      "type" : "object",
+      "description" : "Unique identified for any objects in the system",
+      "properties" : {
+        "uuid" : {
+          "type" : "string",
+          "description" : "Unique identifier for any devices"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "short description of the device"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "long description of the device"
+        },
+        "geography" : {
+          "$ref" : "#/definitions/Geography"
+        }
+      }
+    },
+    "User" : {
+      "type" : "object",
+      "allOf" : [ {
+        "$ref" : "#/definitions/Id"
+      }, {
+        "properties" : {
+          "username" : {
+            "type" : "string",
+            "description" : "Short name to describe a device"
+          },
+          "password" : {
+            "type" : "string",
+            "format" : "password",
+            "description" : "Short name to describe a device"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Full text description"
+          },
+          "lastConnected" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Full text description"
+          },
+          "activated" : {
+            "type" : "boolean",
+            "description" : "account has been activated"
+          },
+          "activationLink" : {
+            "type" : "string",
+            "description" : "URL to activate the account"
+          },
+          "activationLinkExpire" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Time when the link will expire"
+          }
+        }
+      } ]
+    },
+    "Device" : {
+      "type" : "object",
+      "allOf" : [ {
+        "$ref" : "#/definitions/Id"
+      }, {
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Short name to describe a device"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Full text description"
+          },
+          "vendor" : {
+            "type" : "string",
+            "description" : "Vendor Name"
+          },
+          "addressable" : {
+            "type" : "boolean",
+            "description" : "Identify if the device is uniquely addressable"
+          },
+          "queryable" : {
+            "type" : "boolean",
+            "description" : "Is the state of the device can be queried"
+          }
+        }
+      } ]
+    },
+    "Controller" : {
+      "type" : "object",
+      "allOf" : [ {
+        "$ref" : "#/definitions/Device"
+      }, {
+        "properties" : {
+          "ipAddress" : {
+            "type" : "string",
+            "description" : "ip address"
+          },
+          "userId" : {
+            "type" : "string",
+            "description" : "Userid to login to a controller"
+          },
+          "password" : {
+            "type" : "string",
+            "description" : "Password to login to a controller"
+          }
+        }
+      } ]
+    },
+    "Light" : {
+      "type" : "object",
+      "allOf" : [ {
+        "$ref" : "#/definitions/Device"
+      }, {
+        "properties" : {
+          "state" : {
+            "type" : "boolean",
+            "description" : "Is the light on or off"
+          }
+        }
+      } ]
+    },
+    "DimableLight" : {
+      "type" : "object",
+      "description" : "Dimmers are devices used to lower the brightness of a light",
+      "allOf" : [ {
+        "$ref" : "#/definitions/Light"
+      }, {
+        "properties" : {
+          "intensity" : {
+            "type" : "integer",
+            "description" : "The intensity states from 0 to 100%"
+          }
+        }
+      } ]
+    },
+    "DimableLightAction" : {
+      "type" : "object",
+      "description" : "Dimmers are devices used to lower the brightness of a light",
+      "allOf" : [ {
+        "$ref" : "#/definitions/DimableLight"
+      }, {
+        "properties" : {
+          "cloudAction" : {
+            "$ref" : "#/definitions/CloudAction"
+          },
+          "deviceAction" : {
+            "$ref" : "#/definitions/DeviceAction"
+          }
+        }
+      } ]
+    },
+    "DeviceAction" : {
+      "type" : "object",
+      "description" : "Action to a device",
+      "properties" : {
+        "action" : {
+          "type" : "string",
+          "description" : "Device valid action: READ, UPDATE"
+        }
+      }
+    },
+    "CloudAction" : {
+      "type" : "object",
+      "description" : "Action to a device",
+      "properties" : {
+        "action" : {
+          "type" : "string",
+          "description" : "Cloud valid action: CREATE, READ, UPDATE and DELETE"
+        }
+      }
+    },
+    "Geography" : {
+      "type" : "object",
+      "description" : "Longitude Latitude",
+      "properties" : {
+        "lattidude" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Lattidude"
+        },
+        "longitude" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Longitude"
+        }
+      }
+    },
+    "Success" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "fields" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/as87321234/DomoCC/0.0.1"
+}
