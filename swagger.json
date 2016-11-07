@@ -346,12 +346,12 @@
     },
     "Geography" : {
       "type" : "object",
-      "description" : "Longitude Latitude",
+      "description" : "Longitude Lattitude",
       "properties" : {
-        "lattidude" : {
+        "lattitude" : {
           "type" : "number",
           "format" : "double",
-          "description" : "Lattidude"
+          "description" : "Lattitude"
         },
         "longitude" : {
           "type" : "number",
