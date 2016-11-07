@@ -332,13 +332,13 @@
       "type" : "object",
       "description" : "Dimable Light Action command",
       "properties" : {
+        "dimableLight" : {
+          "$ref" : "#/definitions/DimableLight"
+        },
         "action" : {
           "$ref" : "#/definitions/DeviceAction"
         }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/DimableLight"
-      } ]
+      }
     },
     "Error" : {
       "type" : "object",
