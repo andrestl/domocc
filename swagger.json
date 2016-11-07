@@ -235,32 +235,23 @@
     },
     "Device" : {
       "type" : "object",
-      "allOf" : [ {
-        "$ref" : "#/definitions/Id"
-      }, {
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Short name to describe a device"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Full text description"
-          },
-          "vendor" : {
-            "type" : "string",
-            "description" : "Vendor Name"
-          },
-          "addressable" : {
-            "type" : "boolean",
-            "description" : "Identify if the device is uniquely addressable"
-          },
-          "queryable" : {
-            "type" : "boolean",
-            "description" : "Is the state of the device can be queried"
-          }
+      "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/Id"
+        },
+        "vendor" : {
+          "type" : "string",
+          "description" : "Vendor Name"
+        },
+        "addressable" : {
+          "type" : "boolean",
+          "description" : "Identify if the device is uniquely addressable"
+        },
+        "queryable" : {
+          "type" : "boolean",
+          "description" : "Is the state of the device can be queried"
         }
-      } ]
+      }
     },
     "DeviceAction" : {
       "type" : "object",
