@@ -38,14 +38,14 @@
     },
     "/device/DimableLight" : {
       "get" : {
-        "summary" : "Send a command to a DimableLight",
+        "summary" : "Send a command to a DimableLight Switch",
         "description" : "This call sends a command to a dimableLight. On success, the device current state will be return.",
         "tags" : [ "Device" ],
         "parameters" : [ {
-          "name" : "filter",
+          "name" : "command",
           "in" : "body",
-          "description" : "Filter returned list. \n",
-          "required" : false,
+          "description" : "Send a command to a dimable light switch\n",
+          "required" : true,
           "schema" : {
             "$ref" : "#/definitions/DimableLightAction"
           }
@@ -264,14 +264,13 @@
     },
     "DeviceAction" : {
       "type" : "object",
+      "description" : "Device Action ",
       "properties" : {
-        "filter" : {
-          "$ref" : "#/definitions/DeviceFilter"
+        "action" : {
+          "type" : "string",
+          "description" : "Device valid action: READ, UPDATE"
         }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/Device"
-      } ]
+      }
     },
     "DeviceFilter" : {
       "type" : "object",
