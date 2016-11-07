@@ -349,14 +349,14 @@
       "description" : "Longitude Lattitude",
       "properties" : {
         "lattitude" : {
+          "description" : "lattitude",
           "type" : "number",
-          "format" : "double",
-          "description" : "Lattitude"
+          "format" : "double"
         },
         "longitude" : {
+          "description" : "longitude",
           "type" : "number",
-          "format" : "double",
-          "description" : "Longitude"
+          "format" : "double"
         }
       }
     },
