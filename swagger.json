@@ -191,9 +191,6 @@
         "description" : {
           "type" : "string",
           "description" : "long description of the device"
-        },
-        "geography" : {
-          "$ref" : "#/definitions/Geography"
         }
       }
     },
@@ -344,22 +341,6 @@
         "$ref" : "#/definitions/DimableLight"
       } ]
     },
-    "Geography" : {
-      "type" : "object",
-      "description" : "Longitude Lattitude",
-      "properties" : {
-        "lattitude" : {
-          "description" : "lattitude",
-          "type" : "number",
-          "format" : "double"
-        },
-        "longitude" : {
-          "description" : "longitude",
-          "type" : "number",
-          "format" : "double"
-        }
-      }
-    },
     "Error" : {
       "type" : "object",
       "properties" : {
@@ -368,9 +349,6 @@
           "format" : "int32"
         },
         "message" : {
-          "type" : "string"
-        },
-        "fields" : {
           "type" : "string"
         }
       }
