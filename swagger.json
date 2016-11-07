@@ -236,6 +236,9 @@
     "Device" : {
       "type" : "object",
       "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/Id"
+        },
         "name" : {
           "type" : "string",
           "description" : "Short name to describe a device"
