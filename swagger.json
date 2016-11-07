@@ -257,9 +257,46 @@
           "description" : "Is the state of the device can be queried"
         }
       },
-      "allOf" : {
-        "-$ref" : "#/definitions/Id"
-      }
+      "allOf" : [ {
+        "$ref" : "#/definitions/Id"
+      } ]
+    },
+    "Light" : {
+      "type" : "object",
+      "properties" : {
+        "state" : {
+          "type" : "boolean",
+          "description" : "Is the light on or off"
+        }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/Device"
+      } ]
+    },
+    "DimableLight" : {
+      "type" : "object",
+      "description" : "Dimmers are devices used to lower the brightness of a light",
+      "properties" : {
+        "intensity" : {
+          "type" : "integer",
+          "description" : "The intensity states from 0 to 100%"
+        }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/Light"
+      } ]
+    },
+    "DimableLightAction" : {
+      "type" : "object",
+      "description" : "Dimable Light Action command",
+      "properties" : {
+        "action" : {
+          "$ref" : "#/definitions/DeviceAction"
+        }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/DimableLight"
+      } ]
     },
     "DeviceAction" : {
       "type" : "object",
@@ -300,43 +337,6 @@
           }
         }
       } ]
-    },
-    "Light" : {
-      "type" : "object",
-      "properties" : {
-        "state" : {
-          "type" : "boolean",
-          "description" : "Is the light on or off"
-        }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/Device"
-      } ]
-    },
-    "DimableLight" : {
-      "type" : "object",
-      "description" : "Dimmers are devices used to lower the brightness of a light",
-      "properties" : {
-        "intensity" : {
-          "type" : "integer",
-          "description" : "The intensity states from 0 to 100%"
-        }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/Light"
-      } ]
-    },
-    "DimableLightAction" : {
-      "type" : "object",
-      "description" : "Dimable Light Action command",
-      "properties" : {
-        "device" : {
-          "$ref" : "#/definitions/DimableLight"
-        },
-        "action" : {
-          "$ref" : "#/definitions/DeviceAction"
-        }
-      }
     },
     "Error" : {
       "type" : "object",
