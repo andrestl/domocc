@@ -309,9 +309,9 @@
           "description" : "Is the light on or off"
         }
       },
-      "allOf" : {
-        "-$ref" : "#/definitions/Device"
-      }
+      "allOf" : [ {
+        "$ref" : "#/definitions/Device"
+      } ]
     },
     "DimableLight" : {
       "type" : "object",
@@ -322,9 +322,9 @@
           "description" : "The intensity states from 0 to 100%"
         }
       },
-      "allOf" : {
-        "-$ref" : "#/definitions/Light"
-      }
+      "allOf" : [ {
+        "$ref" : "#/definitions/Light"
+      } ]
     },
     "DimableLightAction" : {
       "type" : "object",
