@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Control Center",
-    "description" : "Control Center API for Home Automation\n\nAll API calls run in the context of user and installation that the user has access to. \n",
+    "description" : "Control Center API for Home Automation\n\nAll API calls run in the context of user and installation that the user has access to. \n\n\n    **How to start the swagger editor ?**\n- git clone https://github.com/swagger-api/swagger-editor.git\n- cd swagger-editor\n- npm install\n- npm start\n",
     "version" : "0.0.1"
   },
   "schemes" : [ "https" ],
@@ -264,13 +264,14 @@
     },
     "DeviceAction" : {
       "type" : "object",
-      "description" : "Action to a device",
       "properties" : {
-        "action" : {
-          "type" : "string",
-          "description" : "Device valid action: READ, UPDATE"
+        "filter" : {
+          "$ref" : "#/definitions/DeviceFilter"
         }
-      }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/Device"
+      } ]
     },
     "DeviceFilter" : {
       "type" : "object",
