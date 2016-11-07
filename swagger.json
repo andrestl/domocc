@@ -36,6 +36,36 @@
         }
       }
     },
+    "/device/DimableLight" : {
+      "get" : {
+        "summary" : "Send a command to a DimableLight",
+        "description" : "This call sends a command to a dimableLight. On success, the device current state will be return.",
+        "tags" : [ "Device" ],
+        "parameters" : [ {
+          "name" : "filter",
+          "in" : "body",
+          "description" : "Filter returned list. \n",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DimableLightAction"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "An array of devices",
+            "schema" : {
+              "$ref" : "#/definitions/Device"
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/device/list/filter" : {
       "get" : {
         "summary" : "Device List",
@@ -166,47 +196,6 @@
           "$ref" : "#/definitions/Geography"
         }
       }
-    },
-    "Installation" : {
-      "type" : "object",
-      "properties" : {
-        "owner" : {
-          "$ref" : "#/definitions/User"
-        },
-        "address1" : {
-          "description" : "address line 1",
-          "type" : "string"
-        },
-        "address2" : {
-          "description" : "address line 2",
-          "type" : "string"
-        },
-        "code" : {
-          "description" : "Postal Code or Zip Code",
-          "type" : "string"
-        },
-        "country" : {
-          "description" : "Country name",
-          "type" : "string"
-        },
-        "location" : {
-          "$ref" : "#/definitions/Geography"
-        }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/Id"
-      } ]
-    },
-    "InstallationAction" : {
-      "type" : "object",
-      "properties" : {
-        "cloudAction" : {
-          "$ref" : "#/definitions/CloudAction"
-        }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/Installation"
-      } ]
     },
     "User" : {
       "type" : "object",
@@ -345,28 +334,15 @@
     },
     "DimableLightAction" : {
       "type" : "object",
-      "description" : "Dimmers are devices used to lower the brightness of a light",
+      "description" : "Dimable Light Action command",
       "properties" : {
-        "cloudAction" : {
-          "$ref" : "#/definitions/CloudAction"
-        },
-        "deviceAction" : {
+        "action" : {
           "$ref" : "#/definitions/DeviceAction"
         }
       },
       "allOf" : [ {
         "$ref" : "#/definitions/DimableLight"
       } ]
-    },
-    "CloudAction" : {
-      "type" : "object",
-      "description" : "Action to a device",
-      "properties" : {
-        "action" : {
-          "type" : "string",
-          "description" : "Cloud valid action: CREATE, READ, UPDATE and DELETE"
-        }
-      }
     },
     "Geography" : {
       "type" : "object",
@@ -381,15 +357,6 @@
           "type" : "number",
           "format" : "double",
           "description" : "Longitude"
-        }
-      }
-    },
-    "Success" : {
-      "type" : "object",
-      "properties" : {
-        "code" : {
-          "type" : "integer",
-          "format" : "int32"
         }
       }
     },
