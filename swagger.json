@@ -54,7 +54,7 @@
           "200" : {
             "description" : "An array of devices",
             "schema" : {
-              "$ref" : "#/definitions/Device"
+              "$ref" : "#/definitions/DimableLight"
             }
           },
           "default" : {
@@ -197,9 +197,6 @@
     "User" : {
       "type" : "object",
       "properties" : {
-        "id" : {
-          "$ref" : "#/definitions/Id"
-        },
         "username" : {
           "type" : "string",
           "description" : "Short name to describe a device"
@@ -231,11 +228,25 @@
           "format" : "date-time",
           "description" : "Time when the link will expire"
         }
-      }
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/Id"
+      } ]
     },
     "Device" : {
       "type" : "object",
       "properties" : {
+        "id" : {
+          "$ref" : "#/definitions/Id"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Short name to describe a device"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Full text description"
+        },
         "vendor" : {
           "type" : "string",
           "description" : "Vendor Name"
@@ -247,9 +258,43 @@
         "queryable" : {
           "type" : "boolean",
           "description" : "Is the state of the device can be queried"
+        }
+      }
+    },
+    "Light" : {
+      "type" : "object",
+      "properties" : {
+        "device" : {
+          "$ref" : "#/definitions/Device"
         },
-        "id" : {
-          "$ref" : "#/definitions/Id"
+        "state" : {
+          "type" : "boolean",
+          "description" : "Is the light on or off"
+        }
+      }
+    },
+    "DimableLight" : {
+      "type" : "object",
+      "description" : "Dimmers are devices used to lower the brightness of a light",
+      "properties" : {
+        "light" : {
+          "$ref" : "#/definitions/Light"
+        },
+        "intensity" : {
+          "type" : "integer",
+          "description" : "The intensity states from 0 to 100%"
+        }
+      }
+    },
+    "DimableLightAction" : {
+      "type" : "object",
+      "description" : "Dimable Light Action command",
+      "properties" : {
+        "dimableLight" : {
+          "$ref" : "#/definitions/DimableLight"
+        },
+        "action" : {
+          "$ref" : "#/definitions/DeviceAction"
         }
       }
     },
@@ -292,43 +337,6 @@
           }
         }
       } ]
-    },
-    "Light" : {
-      "type" : "object",
-      "properties" : {
-        "state" : {
-          "type" : "boolean",
-          "description" : "Is the light on or off"
-        },
-        "device" : {
-          "$ref" : "#/definitions/Device"
-        }
-      }
-    },
-    "DimableLight" : {
-      "type" : "object",
-      "description" : "Dimmers are devices used to lower the brightness of a light",
-      "properties" : {
-        "intensity" : {
-          "type" : "integer",
-          "description" : "The intensity states from 0 to 100%"
-        },
-        "light" : {
-          "$ref" : "#/definitions/Light"
-        }
-      }
-    },
-    "DimableLightAction" : {
-      "type" : "object",
-      "description" : "Dimable Light Action command",
-      "properties" : {
-        "dimableLight" : {
-          "$ref" : "#/definitions/DimableLight"
-        },
-        "action" : {
-          "$ref" : "#/definitions/DeviceAction"
-        }
-      }
     },
     "Error" : {
       "type" : "object",
