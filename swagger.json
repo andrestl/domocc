@@ -2,31 +2,29 @@
   "swagger" : "2.0",
   "info" : {
     "title" : "Control Center",
-    "description" : "Control Center API for Home Automation",
+    "description" : "Control Center API for Home Automation\n\nAll API calls run in the context of user and installation that the user has access to. \n",
     "version" : "0.0.1"
   },
   "schemes" : [ "https" ],
   "produces" : [ "application/json" ],
   "paths" : {
-    "/controller/device/dimablelight" : {
+    "/device/list" : {
       "get" : {
-        "summary" : "Send a command to a Dimable Light Switch Devices",
-        "description" : "This end point receive a command for a dimablelight.\n",
-        "parameters" : [ {
-          "name" : "command",
-          "in" : "body",
-          "description" : "Send a command to DimableLight devices",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/DimableLightAction"
-          }
-        } ],
+        "summary" : "Device",
+        "description" : "This call returns a device",
         "tags" : [ "Device" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Device UUID",
+          "required" : true,
+          "type" : "string"
+        } ],
         "responses" : {
           "200" : {
-            "description" : "On success the ",
+            "description" : "An array of devices",
             "schema" : {
-              "$ref" : "#/definitions/DimableLight"
+              "$ref" : "#/definitions/Device"
             }
           },
           "default" : {
@@ -38,12 +36,20 @@
         }
       }
     },
-    "/device/list" : {
+    "/device/list/filter" : {
       "get" : {
         "summary" : "Device List",
-        "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
+        "description" : "This call returns a list of all the devices for a given user and managed installation.\n",
         "tags" : [ "Device" ],
-        "parameters" : [ ],
+        "parameters" : [ {
+          "name" : "filter",
+          "in" : "body",
+          "description" : "Filter returned list. \n",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeviceFilter"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "An array of devices",
@@ -63,10 +69,10 @@
         }
       }
     },
-    "/user/list" : {
+    "/installation/list" : {
       "get" : {
-        "summary" : "Device List",
-        "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
+        "summary" : "Installation List",
+        "description" : "Return a list of all installation associated with the current user\n",
         "tags" : [ "Management" ],
         "parameters" : [ ],
         "responses" : {
@@ -88,11 +94,11 @@
         }
       }
     },
-    "/dimablelight/list" : {
+    "/user/list" : {
       "get" : {
-        "summary" : "Device List",
-        "description" : "The **device/list** endpoint returns the list of devices for an installation.\n",
-        "tags" : [ "Device" ],
+        "summary" : "User List",
+        "description" : "This returns a list of user for given installation.\n\nThis will return only the current user if the user is not an installation administor.\n",
+        "tags" : [ "Management" ],
         "parameters" : [ ],
         "responses" : {
           "200" : {
@@ -107,7 +113,7 @@
           "default" : {
             "description" : "Unexpected error",
             "schema" : {
-              "$ref" : "#/definitions/DimableLight"
+              "$ref" : "#/definitions/User"
             }
           }
         }
@@ -270,6 +276,25 @@
         }
       } ]
     },
+    "DeviceAction" : {
+      "type" : "object",
+      "description" : "Action to a device",
+      "properties" : {
+        "action" : {
+          "type" : "string",
+          "description" : "Device valid action: READ, UPDATE"
+        }
+      }
+    },
+    "DeviceFilter" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Filter list of device by name"
+        }
+      }
+    },
     "Controller" : {
       "type" : "object",
       "allOf" : [ {
@@ -332,16 +357,6 @@
       "allOf" : [ {
         "$ref" : "#/definitions/DimableLight"
       } ]
-    },
-    "DeviceAction" : {
-      "type" : "object",
-      "description" : "Action to a device",
-      "properties" : {
-        "action" : {
-          "type" : "string",
-          "description" : "Device valid action: READ, UPDATE"
-        }
-      }
     },
     "CloudAction" : {
       "type" : "object",
