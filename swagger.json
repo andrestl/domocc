@@ -235,32 +235,31 @@
     },
     "Device" : {
       "type" : "object",
-      "allOf" : [ {
-        "$ref" : "#/definitions/Id"
-      }, {
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Short name to describe a device"
-          },
-          "description" : {
-            "type" : "string",
-            "description" : "Full text description"
-          },
-          "vendor" : {
-            "type" : "string",
-            "description" : "Vendor Name"
-          },
-          "addressable" : {
-            "type" : "boolean",
-            "description" : "Identify if the device is uniquely addressable"
-          },
-          "queryable" : {
-            "type" : "boolean",
-            "description" : "Is the state of the device can be queried"
-          }
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Short name to describe a device"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Full text description"
+        },
+        "vendor" : {
+          "type" : "string",
+          "description" : "Vendor Name"
+        },
+        "addressable" : {
+          "type" : "boolean",
+          "description" : "Identify if the device is uniquely addressable"
+        },
+        "queryable" : {
+          "type" : "boolean",
+          "description" : "Is the state of the device can be queried"
         }
-      } ]
+      },
+      "allOf" : {
+        "-$ref" : "#/definitions/Id"
+      }
     },
     "DeviceAction" : {
       "type" : "object",
@@ -304,42 +303,40 @@
     },
     "Light" : {
       "type" : "object",
-      "allOf" : [ {
-        "$ref" : "#/definitions/Device"
-      }, {
-        "properties" : {
-          "state" : {
-            "type" : "boolean",
-            "description" : "Is the light on or off"
-          }
+      "properties" : {
+        "state" : {
+          "type" : "boolean",
+          "description" : "Is the light on or off"
         }
-      } ]
+      },
+      "allOf" : {
+        "-$ref" : "#/definitions/Device"
+      }
     },
     "DimableLight" : {
       "type" : "object",
       "description" : "Dimmers are devices used to lower the brightness of a light",
-      "allOf" : [ {
-        "$ref" : "#/definitions/Light"
-      }, {
-        "properties" : {
-          "intensity" : {
-            "type" : "integer",
-            "description" : "The intensity states from 0 to 100%"
-          }
+      "properties" : {
+        "intensity" : {
+          "type" : "integer",
+          "description" : "The intensity states from 0 to 100%"
         }
-      } ]
+      },
+      "allOf" : {
+        "-$ref" : "#/definitions/Light"
+      }
     },
     "DimableLightAction" : {
       "type" : "object",
       "description" : "Dimable Light Action command",
       "properties" : {
+        "device" : {
+          "$ref" : "#/definitions/DimableLight"
+        },
         "action" : {
           "$ref" : "#/definitions/DeviceAction"
         }
-      },
-      "allOf" : [ {
-        "$ref" : "#/definitions/DimableLight"
-      } ]
+      }
     },
     "Error" : {
       "type" : "object",
